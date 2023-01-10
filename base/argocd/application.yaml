@@ -12,7 +12,7 @@ spec:
   source:
     path: overlays/dev
     repoURL: >-
-      https://gitlab.wirecard-cloud.com/pagonxt-psre/application-orchestration/Linkerd.git
+      https://github.com/Tomelin/linkerd-argocd.git
     targetRevision: main
   project: linkerd
   syncPolicy:
