@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: linkerd
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: linkerd
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: overlays/dev
+    repoURL: >-
+      https://gitlab.wirecard-cloud.com/pagonxt-psre/application-orchestration/Linkerd.git
+    targetRevision: main
+  project: linkerd
+  syncPolicy:
+    automated: null
+    syncOptions:
+      - CreateNamespace=true
