@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: linkerd-jaeger
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  destination:
+    namespace: linkerd-viz
+    server: https://kubernetes.default.svc
+  project: linkerd
+  source:
+    path: overlays/dev/jaeger
+    repoURL: https://github.com/Tomelin/linkerd-argocd.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
