@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: linkerd-crds
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  destination:
+    namespace: linkerd
+    server: https://kubernetes.default.svc
+  project: linkerd
+  source:
+    path: overlays/dev/crds
+    repoURL: https://github.com/Tomelin/linkerd-argocd.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
