@@ -5,37 +5,13 @@ metadata:
   name: linkerd
   namespace: argocd
 spec:
-  description: "Linkerd Service Mesh"
+  description: Linkerd Service Mesh
   destinations:
-  - namespace: linkerd
-    server: "*"  # cluster 
-  namespaceResourceWhitelist:
-    - group: "*"
-      kind: "*"
-  namespaceResourceBlacklist:
-  - group: ''
-    kind: ResourceQuota
-  - group: ''
-    kind: LimitRange
-  - group: ''
-    kind: NetworkPolicy
-  orphanedResources:
-    warn: false
-  syncWindows:
-  - kind: allow
-    schedule: '10 1 * * *'
-    duration: 1h
-    applications:
-      - '*-prod'
-    manualSync: true
-  - kind: deny
-    schedule: '0 22 * * *'
-    duration: 1h
-    namespaces:
-      - default
-  - kind: allow
-    schedule: '0 23 * * *'
-    duration: 1h
-    clusters:
-      - in-cluster
-      - cluster1
+  - name: '*'
+    namespace: '*'
+    server: https://kubernetes.default.svc
+  sourceRepos:
+  - https://github.com/Tomelin/linkerd-argocd.git
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
